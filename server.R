@@ -9,7 +9,7 @@ our.server <- function(input,output) {
   output$politician.over.time <- renderPlot({
     candidate.data <- hip.hop.data %>% filter(candidate == input$candidate) 
     ggplot(candidate.data, aes(x=album_release_date)) +
-      geom_dotplot(aes(fill = sentiment)) +
+      geom_histogram(aes(fill = sentiment)) +
       xlab("Year") +
       ylab("Count") +
       ggtitle("Lyrical Sentiment Over Time") +
