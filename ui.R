@@ -29,14 +29,15 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                      #   
                      # ),
                      # 
-                     tabPanel("Rasik"),
-                     # fluidPage(
-                     #   titlePanel("Mentions of 2016 Primary Candidates"),
-                     #   
-                     #   mainPanel(
-                     #     plotOutput("mentions", hover = "plot.hover")
-                     #   )
-                     # ),
+                     tabPanel("Rasik",
+                     fluidPage(
+                       titlePanel("Mentions of 2016 Primary Candidates"),
+
+                       mainPanel(
+                         plotOutput("mentions", hover = "plot.hover"),
+                         verbatimTextOutput("lyric")
+                       )
+                     ),
                      tabPanel("Ethan")
                      #ethan's sidepannel/inputs here
                      
