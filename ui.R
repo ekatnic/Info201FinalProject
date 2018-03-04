@@ -37,9 +37,18 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                      #     plotOutput("mentions", hover = "plot.hover")
                      #   )
                      # ),
-                     tabPanel("Ethan")
                      #ethan's sidepannel/inputs here
+                     tabPanel("Ethan",
+                              sidebarLayout(
+                                sidebarPanel(
+                                  
+                                )
+                                mainPanel(
+                                  plotOutput("politician.over.time")
+                                )
+                              
+                              )
+                    
                      
-  
 ))
 
