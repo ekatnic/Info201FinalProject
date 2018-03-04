@@ -1,33 +1,34 @@
 library(shiny)
 source("server.R")
+hip.hop.data <- read.csv("data/genius_hip_hop_lyrics.csv", stringsAsFactors = FALSE)
 
 my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                      tabPanel("Jarod"),
                      #jarod's sidepannels/inputs here
-                     
-                     tabPanel("Abbey",
-                     #abbey's sidepannels/inputs here
-                     fluidPage(
-                       titlePannel("Word Cloud"),
-                       sidebarLayout(
-                         sidebarPannel(
-                           selectInput("politician", "Choose a politician:",
-                                       choices = c("Mike Huckabee", "Jeb Bush", "Ben Carson",
-                                                   "Chris Christie", "Ted Cruz", "Hillary Clinton",
-                                                   "Donald Trump")),
-                           sliderInput("freq",
-                                       "Minimum Frequency:",
-                                       min = 1, max = 10, value = 5),
-                           sliderInput("max",
-                                       "Maximum Number of Words:",
-                                       min = 1, max = 20, value = 10)
-                         ),
-                         mainPanel(
-                           plotOutput("wordPlot")
-                         )
-                       )
-                     )
-                     )
+                     # 
+                     # tabPanel("Abbey",
+                     # #abbey's sidepannels/inputs here
+                     # fluidPage(
+                     #   titlePannel("Word Cloud"),
+                     #   sidebarLayout(
+                     #     sidebarPannel(
+                     #       selectInput("politician", "Choose a politician:",
+                     #                   choices = c("Mike Huckabee", "Jeb Bush", "Ben Carson",
+                     #                               "Chris Christie", "Ted Cruz", "Hillary Clinton",
+                     #                               "Donald Trump")),
+                     #       sliderInput("freq",
+                     #                   "Minimum Frequency:",
+                     #                   min = 1, max = 10, value = 5),
+                     #       sliderInput("max",
+                     #                   "Maximum Number of Words:",
+                     #                   min = 1, max = 20, value = 10)
+                     #     ),
+                     #     mainPanel(
+                     #       plotOutput("wordPlot")
+                     #     )
+                     #   )
+                     # )
+                     # ),
                      tabPanel("Rasik",
                               fluidPage(
                                 titlePanel("Mentions of 2016 Primary Candidates"),
@@ -42,6 +43,10 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                      tabPanel("Ethan",
                               sidebarLayout(
                                 sidebarPanel(
+                                  selectInput("candidate", label = h3("Choose a Candidate"),
+                                              choices = list("Ben Carson","Bernie Sanders", "Chris Christie",
+                                                             "Hillary Clinton", "Jeb Bush", "Mike Huckabee",
+                                                             "Ted Cruz"))
                                 ),
                                 mainPanel(
                                   plotOutput("politician.over.time")
@@ -50,6 +55,6 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                               )
                      
                      ) 
-          )
-)
+            )
+        )
 
