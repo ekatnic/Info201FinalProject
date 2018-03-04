@@ -8,9 +8,9 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                      tabPanel("Abbey",
                      #abbey's sidepannels/inputs here
                      fluidPage(
-                       titlePannel("Word Cloud"),
+                       titlePanel("Word Cloud"),
                        sidebarLayout(
-                         sidebarPannel(
+                         sidebarPanel(
                            selectInput("politician", "Choose a politician:",
                                        choices = c("Mike Huckabee", "Jeb Bush", "Ben Carson",
                                                    "Chris Christie", "Ted Cruz", "Hillary Clinton",
