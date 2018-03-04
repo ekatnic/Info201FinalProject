@@ -8,22 +8,14 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                      tabPanel("Abbey",
                      #abbey's sidepannels/inputs here
                      fluidPage(
-                       titlePanel("Word Cloud"),
+                       titlePanel("Political Party Over Time"),
                        sidebarLayout(
                          sidebarPanel(
-                           selectInput("politician", "Choose a politician:",
-                                       choices = c("Mike Huckabee", "Jeb Bush", "Ben Carson",
-                                                   "Chris Christie", "Ted Cruz", "Hillary Clinton",
-                                                   "Donald Trump")),
-                           sliderInput("freq",
-                                       "Minimum Frequency:",
-                                       min = 1, max = 10, value = 5),
-                           sliderInput("max",
-                                       "Maximum Number of Words:",
-                                       min = 1, max = 20, value = 10)
+                           selectInput("party", "Choose a political party:",
+                                       choices = c("Democrat", "Republican"))
                          ),
                          mainPanel(
-                           plotOutput("wordPlot")
+                           plotOutput("scatterPlot")
                          )
                        )
                      )
