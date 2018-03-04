@@ -25,9 +25,11 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                      tabPanel("Rasik",
                               fluidPage(
                                 titlePanel("Mentions of 2016 Primary Candidates"),
-                                mainPanel(
-                                  plotOutput("mentions", hover = "plot.hover"),
+                                sidebarPanel(
                                   verbatimTextOutput("lyric")
+                                ),
+                                mainPanel(
+                                  plotOutput("mentions", hover = "plot.hover")
                                 )
                                )
                               ),

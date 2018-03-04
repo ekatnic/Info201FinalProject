@@ -17,12 +17,12 @@ our.server <- function(input,output) {
     ggplot(hip.hop.data, aes(album_release_date)) + 
       geom_dotplot(aes(fill = candidate)) +
       theme(legend.position = "top") +
-      labs(title = "Mentions of 2016 Primary Candidates", x = "Date", y = "Frequency") 
+      labs(title = "Candidate Sentiment Over Time", x = "Date", y = "Frequency") 
   })
   
   output$lyric <- renderPrint({
-    lyric.info <- nearPoints(hip.hop.data, input$lyric)
-    req(nrow(brand.info) != 0)
+    lyric.info <- nearPoints(hip.hop.data, input$plot.hover, yvar = NULL)
+    req(nrow(lyric.info) != 0)
     print(lyric.info, row.names = FALSE)
   })
   
