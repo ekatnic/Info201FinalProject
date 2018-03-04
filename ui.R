@@ -9,7 +9,13 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                      #abbey's sidepannels/inputs here
                      
                      tabPanel("Rasik"),
-                     #rasik's sidepannels/inputs here 
+                     fluidPage(
+                       titlePanel("Mentions of 2016 Primary Candidates"),
+                       
+                       mainPanel(
+                         plotOutput("mentions", hover = "plot.hover")
+                       )
+                     ), 
                      
                      tabPanel("Ethan")
                      #ethan's sidepannel/inputs here
