@@ -38,20 +38,19 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                          verbatimTextOutput("lyric")
                        )
                      ),
-                     
-                     tabPanel("Ethan")
+   
                      #ethan's sidepannel/inputs here
                      tabPanel("Ethan",
                               sidebarLayout(
                                 sidebarPanel(
-                                  
-                                )
+                                ),
                                 mainPanel(
                                   plotOutput("politician.over.time")
                                 )
                               
                               )
-                    
                      
-))
+                     ) 
+          )
+)
 
