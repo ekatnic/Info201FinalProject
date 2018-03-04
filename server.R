@@ -27,9 +27,11 @@ our.server <- function(input,output) {
   })
   
   output$scatterPlot <- renderPlot({
-    new_data <- hip.hop.data %>% filter(sentiment == input$sentiment) %>% select(album_release_date, sentiment)
-    colnames(new_data)[2] <- input$sentiment
-    ggplot(new_data) + geom_bar(aes(x = new_data[1], y = new_data[2]))
+    #proportion of sentiment ncols = 216
+    # need to group by year, then divide to find frequency
+    new_data <- hip.hop.data %>% filter(sentiment == input$sentiment) %>% select(album_release_date)
+    ggplot(new_data, aes(x = new_data$album_release_date, y = factor(album_release_date))) + geom_col(color = "green", fill = "blue") +
+      xlab("year") + ylab(input$sentiment) + ggtitle(paste0("Frequency of ", input$sentiment, " Lyrics Over Time"))
   })
 }
 
