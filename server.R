@@ -27,15 +27,9 @@ our.server <- function(input,output) {
   })
   
   output$scatterPlot <- renderPlot({
-    if(get(input$party) == "Democrat") {
-      party.data <- hip.hop.data %>% filter(candidate == "Hillary Clinton" | "Bernie Sanders") %>% 
-        select(sentiment)
-    } else {
-      party.data <- hip.hop.data %>% filter((candidate != "Hillary Clinton") & (candidate != "Bernie Sanders")) %>% 
-        select(sentiment)
-    }
-    
-
+    new_data <- hip.hop.data %>% filter(sentiment == input$sentiment) %>% select(album_release_date, sentiment)
+    colnames(new_data)[2] <- input$sentiment
+    ggplot(new_data) + geom_bar(aes(x = new_data[1], y = new_data[2]))
   })
 }
 
