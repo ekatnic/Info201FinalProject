@@ -9,11 +9,11 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                      tabPanel("Abbey",
                      #abbey's sidepannels/inputs here
                      fluidPage(
-                       titlePanel("Political Party"),
+                       titlePanel("Sentiment Over Time"),
                        sidebarLayout(
                          sidebarPanel(
-                           selectInput("party", "Choose a political party:",
-                                       choices = c("Democrat", "Republican"))
+                           selectInput("sentiment", "Choose a sentiment:",
+                                       choices = c("neutral", "negative", "positive"))
                          ),
                          mainPanel(
                            plotOutput("scatterPlot")
