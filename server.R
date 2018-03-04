@@ -7,10 +7,13 @@ our.server <- function(input,output) {
   hip.hop.data <- read.csv("data/genius_hip_hop_lyrics.csv", stringsAsFactors = FALSE)
   
   output$politician.over.time <- renderPlot({
-    candidate.data <- hip.hop.data %>% filter(candidate == input$candidate)
+    candidate.data <- hip.hop.data %>% filter(candidate == input$candidate) 
     ggplot(candidate.data, aes(x=album_release_date)) +
       geom_dotplot(aes(fill = sentiment)) +
-      theme(legend.position = "top")
+      xlab("Year") +
+      ylab("Count") +
+      ggtitle("Lyrical Sentiment Over Time") +
+      theme(legend.position = "top", plot.title = element_text(hjust = 0.5))
   })
   
   output$mentions <- renderPlot({
