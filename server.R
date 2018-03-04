@@ -11,7 +11,9 @@ our.server <- function(input,output) {
     ggplot(candidate.data, aes(x=album_release_date)) +
       geom_histogram(aes(fill = sentiment)) +
       xlab("Year") +
+      xlim(1989, 2015) +
       ylab("Count") +
+      ylim(0, 35) +
       ggtitle("Lyrical Sentiment Over Time") +
       theme(legend.position = "top", plot.title = element_text(hjust = 0.5))
   })
