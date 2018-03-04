@@ -29,28 +29,27 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                      )
                      ),
                      tabPanel("Rasik",
-                     fluidPage(
-                       titlePanel("Mentions of 2016 Primary Candidates"),
-
-                       mainPanel(
-                         plotOutput("mentions", hover = "plot.hover"),
-                         verbatimTextOutput("lyric")
-                       )
-                     ),
-                     
-                     tabPanel("Ethan")
+                              fluidPage(
+                                titlePanel("Mentions of 2016 Primary Candidates"),
+                                mainPanel(
+                                  plotOutput("mentions", hover = "plot.hover"),
+                                  verbatimTextOutput("lyric")
+                                )
+                               )
+                              ),
+   
                      #ethan's sidepannel/inputs here
                      tabPanel("Ethan",
                               sidebarLayout(
                                 sidebarPanel(
-                                  
-                                )
+                                ),
                                 mainPanel(
                                   plotOutput("politician.over.time")
                                 )
                               
                               )
-                    
                      
-))
+                     ) 
+          )
+)
 
