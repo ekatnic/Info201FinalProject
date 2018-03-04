@@ -29,13 +29,13 @@ our.server <- function(input,output) {
   output$scatterPlot <- renderPlot({
     if(get(input$party) == "Democrat") {
       party.data <- hip.hop.data %>% filter(candidate == "Hillary Clinton" | "Bernie Sanders") %>% 
-        select(sentiment)
+        select(album_release_date, sentiment)
     } else {
       party.data <- hip.hop.data %>% filter((candidate != "Hillary Clinton") & (candidate != "Bernie Sanders")) %>% 
-        select(sentiment)
+        select(album_release_date, sentiment)
     }
-    
-
+    bar <- ggplot(party.data, aes(x = factor(1), fill = factor(sentiment))) + geom_bar(width = 1)
+    bar + coord_polar(theta = "y")
   })
 }
 

@@ -9,7 +9,7 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                      tabPanel("Abbey",
                      #abbey's sidepannels/inputs here
                      fluidPage(
-                       titlePanel("Political Party Over Time"),
+                       titlePanel("Political Party"),
                        sidebarLayout(
                          sidebarPanel(
                            selectInput("party", "Choose a political party:",
