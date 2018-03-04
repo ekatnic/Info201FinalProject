@@ -27,7 +27,7 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                          )
                        )
                      )
-                     )
+                     ),
                      tabPanel("Rasik",
                      fluidPage(
                        titlePanel("Mentions of 2016 Primary Candidates"),
