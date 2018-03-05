@@ -27,6 +27,10 @@ our.server <- function(input,output) {
       labs(title = "Candidates Mentioned Per Year") +
       theme_fivethirtyeight()+
       scale_fill_brewer(palette = "Set3")
+    # x axis: artist
+    # y axis: count
+    # color: candidate
+    #
   })
   
   output$lyric <- renderPrint({
