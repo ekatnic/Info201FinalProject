@@ -51,7 +51,7 @@ our.server <- function(input,output) {
   
     #Sort candidate -working
     output$rapTable <- renderTable({
-      hip.hop.data %>% filter(candidate == input$candidate) %>% filter(sentiment == input$sent)
+      hip.hop.data %>% filter(candidate == input$candidate2) %>% filter(sentiment == input$sent)
     })
     #Sort sentiment almost working
 }
