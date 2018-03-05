@@ -8,7 +8,7 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                      fluidPage(
                        headerPanel('Political Rap Table'),
                        sidebarPanel(
-                         selectInput(inputId  = "candidate",
+                         selectInput(inputId  = "candidate2",
                                      label = strong("Table by candidate"),
                                      choices = c("Donald Trump", "Hillary Clinton", "Ted Cruz", "Chris Christie", "Ben Carson", "Jeb Bush", "Mike Huckabee"),
                                      selected = "Donald Trump"),

@@ -51,9 +51,15 @@ our.server <- function(input,output) {
   })
   
     #Sort candidate -working
+<<<<<<< HEAD
   output$rapTable <- renderTable({
       hip.hop.data %>% filter(candidate == input$candidate) %>% filter(sentiment == input$sent)
   })
+=======
+    output$rapTable <- renderTable({
+      hip.hop.data %>% filter(candidate == input$candidate2) %>% filter(sentiment == input$sent)
+    })
+>>>>>>> 6cb4c897c52458ac80bab321532e82ed04d24a80
     #Sort sentiment almost working
 }
 
