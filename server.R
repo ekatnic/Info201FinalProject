@@ -37,14 +37,16 @@ our.server <- function(input,output) {
   
   output$scatterPlot <- renderPlot({
     #making final table to be plotted
+    #1989 - 2016
     final_table <- hip.hop.data %>% group_by(album_release_date) %>% 
                 mutate(n_x = n()) %>% 
                 group_by(album_release_date, sentiment) %>% 
                 summarize(percent = (n() / first(n_x)) * 100) %>% 
-                filter(sentiment == input$sentiment)
+                filter(sentiment == input$sentiment) 
     
+    #plotting table
     ggplot(final_table, aes(x = final_table$album_release_date, y = final_table$percent)) + geom_col(fill = "green") + xlab("year") + 
-      ylab(input$sentiment) + ggtitle(paste0("Percent of ", input$sentiment, " Lyrics Over Time"))
+      geom_smooth(method = 'lm', formula = y~x) + ylab(input$sentiment) + ggtitle(paste0("Percent of ", input$sentiment, " Lyrics Over Time"))
   })
   
     #Sort candidate -working
