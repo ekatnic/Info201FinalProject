@@ -13,12 +13,14 @@ our.server <- function(input,output) {
     candidate.data <- hip.hop.data %>% filter(candidate == "Donald Trump") 
     ggplot(candidate.data, aes(x=album_release_date)) +
       geom_histogram(aes(fill = sentiment), na.rm = TRUE) +
+      scale_fill_manual(values=c("red", "blue", "green3")) +
       xlab("Year") +
       xlim(adjustedRange) +
       ylab("Count") +
       ylim(0, 35) +
-      ggtitle("Donald Trump Lyrics Over Time") +
-      theme(legend.position = "top", plot.title = element_text(hjust = 0.5))
+      ggtitle("Donald Trump Mentions Over Time") +
+      theme(axis.title = element_text(size = 18), plot.title = element_text(size = 22, face = "bold", hjust = .5),
+            legend.position = "top")
   })
   
   output$clinton.over.time <- renderPlot({
@@ -26,12 +28,28 @@ our.server <- function(input,output) {
     candidate.data <- hip.hop.data %>% filter(candidate == "Hillary Clinton") 
     ggplot(candidate.data, aes(x=album_release_date)) +
       geom_histogram(aes(fill = sentiment), na.rm = TRUE) +
+      scale_fill_manual(values=c("red", "blue", "green3")) +
       xlab("Year") +
       xlim(adjustedRange) +
       ylab("Count") +
       ylim(0, 35) +
-      ggtitle("Hillary Clinton Lyrics Over Time") +
-      theme(legend.position = "top", plot.title = element_text(hjust = 0.5))
+      ggtitle("Hillary Clinton Mentions Over Time") +
+      theme(axis.title = element_text(size = 18), plot.title = element_text(size = 22, face = "bold", hjust = .5), 
+            legend.position = "top")
+  })
+  
+  output$subject.matter <- renderPlot({
+    candidate.data <- hip.hop.data %>% filter(candidate == input$candidate, theme != "N/A")
+    ggplot(candidate.data, aes(x=album_release_date)) +
+      geom_histogram(aes(fill = theme), na.rm=TRUE) +
+      scale_fill_manual(values=c("hotel" = "yellow2", "money" = "green3", "personal" = "blue",
+                                 "political" = "red", "power" =" purple", "sexual" = "orange",
+                                 "The Apprentice" = "black", "orange")) +
+      ggtitle("Subject Matter Over Time") +
+      xlab("Year") +
+      ylab("Count") +
+      theme(axis.title = element_text(size = 18), plot.title = element_text(size = 22, face = "bold", hjust = .5))
+    
   })
   
   output$primaries <- renderPlot({

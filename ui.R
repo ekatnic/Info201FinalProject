@@ -55,10 +55,10 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                               ),
    
                      #ethan's sidepannel/inputs here
-                     tabPanel("Ethan",
+                     tabPanel("EthanSentiment",
                               sidebarLayout(
                                 sidebarPanel(
-                                  sliderInput("year.range", label = h3("Choose Time Frame"), 
+                                  sliderInput("year.range", h3("Choose Time Frame"), 
                                               min = 1989, max=2016, value= c(1989, 2016) , sep="")
                                 ),
                                 mainPanel(
@@ -68,7 +68,21 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                               
                               )
                      
-                     ) 
+                     ),
+                     tabPanel("EthanSubject",
+                              sidebarLayout(
+                                sidebarPanel(
+                                  selectInput("candidate", "Choose Candidate",
+                                              choices = list("Donald Trump", "Hillary Clinton", "Jeb Bush",
+                                                             "Bernie Sanders", "Ben Carson", "Ted Cruz",
+                                                             "Mike Huckuckabee", "Chris Christie"))
+                                    
+                                  ),
+                                mainPanel(
+                                  plotOutput("subject.matter")
+                                )
+                              )
+                     )
             )
         )
 
