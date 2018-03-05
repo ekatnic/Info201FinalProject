@@ -36,15 +36,15 @@ our.server <- function(input,output) {
   })
   
   output$scatterPlot <- renderPlot({
-    #proportion of sentiment ncols = 216
-    # need to group by year, then divide to find frequency
-    year_freq <- hip.hop.data %>% group_by(album_release_date) %>% 
-        summarize(num_per_year = n(), 
-                  num_unique = count(input$sentiment),
-                  proportion = (num_unique / num_per_year) * 100,
-                  year = album_release_date)
-    ggplot(year_freq, aes(x = year, y = proportion)) + geom_bar(color = "green") + xlab("year") + ylab(input$sentiment) +
-      ggtitle(paste0("Percent of ", input$sentiment, " Lyrics Over Time"))
+    #making final table to be plotted
+    final_table <- hip.hop.data %>% group_by(album_release_date) %>% 
+                mutate(n_x = n()) %>% 
+                group_by(album_release_date, sentiment) %>% 
+                summarize(percent = (n() / first(n_x)) * 100) %>% 
+                filter(sentiment == input$sentiment)
+    
+    ggplot(final_table, aes(x = final_table$album_release_date, y = final_table$percent)) + geom_col(fill = "green") + xlab("year") + 
+      ylab(input$sentiment) + ggtitle(paste0("Percent of ", input$sentiment, " Lyrics Over Time"))
   })
   
     #Sort candidate -working

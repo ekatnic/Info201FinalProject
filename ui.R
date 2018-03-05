@@ -3,7 +3,7 @@ source("server.R")
 hip.hop.data <- read.csv("data/genius_hip_hop_lyrics.csv", stringsAsFactors = FALSE)
 
 my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
-                     tabPanel("Jarod"),
+                     tabPanel("Jarod",
                      #jarod's sidepannels/inputs here
                      fluidPage(
                        headerPanel('Political Rap Table'),
@@ -21,6 +21,7 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                          mainPanel(tableOutput("rapTable")
                          )
                        )
+                     )
                      ),
                      
                      tabPanel("Abbey",
