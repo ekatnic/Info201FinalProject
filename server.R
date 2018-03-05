@@ -46,6 +46,14 @@ our.server <- function(input,output) {
     ggplot(year_freq, aes(x = year, y = proportion)) + geom_bar(color = "green") + xlab("year") + ylab(input$sentiment) +
       ggtitle(paste0("Percent of ", input$sentiment, " Lyrics Over Time"))
   })
+  
+  tableJ <- function(input, output) {
+    #Sort candidate -working
+    output$rapTable <- renderTable({
+      hip.hop.data %>% filter(candidate == input$candidate) %>% filter(sentiment == input$sent)
+    })
+    #Sort sentiment
+  }
 }
 
 

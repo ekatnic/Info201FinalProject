@@ -5,7 +5,24 @@ hip.hop.data <- read.csv("data/genius_hip_hop_lyrics.csv", stringsAsFactors = FA
 my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                      tabPanel("Jarod"),
                      #jarod's sidepannels/inputs here
-   
+                     fluidPage(
+                       headerPanel('Political Rap Table'),
+                       sidebarPanel(
+                         selectInput(inputId  = "candidate",
+                                     label = strong("Table by candidate"),
+                                     choices = c("Donald Trump", "Hillary Clinton", "Ted Cruz", "Chris Christie", "Ben Carson", "Jeb Bush", "Mike Huckabee"),
+                                     selected = "Donald Trump"),
+                         checkboxGroupInput(inputId = "sent",
+                                            label = "Sentiments to show:",
+                                            choices = c("Negative Sentiments" = "negative",
+                                                        "Neutral Sentiments" = "neutral",
+                                                        "Positive Sentiments" = "positive"),
+                                            selected = list("negative", "neutral", "positive")),
+                         mainPanel(tableOutput("rapTable")
+                         )
+                       )
+                     ),
+                     
                      tabPanel("Abbey",
                      #abbey's sidepannels/inputs here
                      fluidPage(
