@@ -29,7 +29,7 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                                   verbatimTextOutput("lyric")
                                 ),
                                 mainPanel(
-                                  plotOutput("mentions", hover = "plot.hover")
+                                  plotOutput("primaries", hover = "plot.hover")
                                 )
                                )
                               ),

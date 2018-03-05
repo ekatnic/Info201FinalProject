@@ -1,6 +1,8 @@
 library(shiny)
 library(dplyr)
 library(ggplot2)
+#install.packages("ggthemes")
+library(ggthemes)
 
 our.server <- function(input,output) {
   
@@ -18,15 +20,17 @@ our.server <- function(input,output) {
       theme(legend.position = "top", plot.title = element_text(hjust = 0.5))
   })
   
-  output$mentions <- renderPlot({
-    ggplot(hip.hop.data, aes(album_release_date)) + 
-      geom_dotplot(aes(fill = candidate)) +
-      theme(legend.position = "top") +
-      labs(title = "Candidate Sentiment Over Time", x = "Date", y = "Frequency") 
+  output$primaries <- renderPlot({
+    ggplot(hip.hop.data, aes(x = album_release_date)) +
+      geom_dotplot(aes(fill = candidate), binwidth = 1, method = "histodot") +
+      ylim(0, 50) +
+      labs(title = "Candidates Mentioned Per Year") +
+      theme_fivethirtyeight()+
+      scale_fill_brewer(palette = "Set3")
   })
   
   output$lyric <- renderPrint({
-    lyric.info <- nearPoints(hip.hop.data, input$plot.hover, yvar = NULL)
+    lyric.info <- nearPoints(hip.hop.data, input$plot.hover, yvar = NULL) 
     req(nrow(lyric.info) != 0)
     print(lyric.info, row.names = FALSE)
   })
