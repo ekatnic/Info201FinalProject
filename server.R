@@ -38,7 +38,8 @@ our.server <- function(input,output) {
   output$scatterPlot <- renderPlot({
     #making final table to be plotted
     #1989 - 2016
-    final_table <- hip.hop.data %>% group_by(album_release_date) %>% 
+    final_table <- hip.hop.data %>% filter((album_release_date >= input$range[1]) &(album_release_date <= input$range[2])) %>% 
+                group_by(album_release_date) %>% 
                 mutate(n_x = n()) %>% 
                 group_by(album_release_date, sentiment) %>% 
                 summarize(percent = (n() / first(n_x)) * 100) %>% 
@@ -50,9 +51,9 @@ our.server <- function(input,output) {
   })
   
     #Sort candidate -working
-    output$rapTable <- renderTable({
+  output$rapTable <- renderTable({
       hip.hop.data %>% filter(candidate == input$candidate) %>% filter(sentiment == input$sent)
-    })
+  })
     #Sort sentiment almost working
 }
 
