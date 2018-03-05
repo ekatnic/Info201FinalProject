@@ -47,13 +47,11 @@ our.server <- function(input,output) {
       ggtitle(paste0("Percent of ", input$sentiment, " Lyrics Over Time"))
   })
   
-  tableJ <- function(input, output) {
     #Sort candidate -working
     output$rapTable <- renderTable({
       hip.hop.data %>% filter(candidate == input$candidate) %>% filter(sentiment == input$sent)
     })
-    #Sort sentiment
-  }
+    #Sort sentiment almost working
 }
 
 
