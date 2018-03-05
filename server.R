@@ -8,15 +8,29 @@ our.server <- function(input,output) {
   
   hip.hop.data <- read.csv("data/genius_hip_hop_lyrics.csv", stringsAsFactors = FALSE)
   
-  output$politician.over.time <- renderPlot({
-    candidate.data <- hip.hop.data %>% filter(candidate == input$candidate) 
+  output$trump.over.time <- renderPlot({
+    adjustedRange <- c(input$year.range[1]-1, input$year.range[2]+1)
+    candidate.data <- hip.hop.data %>% filter(candidate == "Donald Trump") 
     ggplot(candidate.data, aes(x=album_release_date)) +
-      geom_histogram(aes(fill = sentiment)) +
+      geom_histogram(aes(fill = sentiment), na.rm = TRUE) +
       xlab("Year") +
-      xlim(1989, 2015) +
+      xlim(adjustedRange) +
       ylab("Count") +
       ylim(0, 35) +
-      ggtitle("Lyrical Sentiment Over Time") +
+      ggtitle("Donald Trump Lyrics Over Time") +
+      theme(legend.position = "top", plot.title = element_text(hjust = 0.5))
+  })
+  
+  output$clinton.over.time <- renderPlot({
+    adjustedRange <- c(input$year.range[1]-1, input$year.range[2]+1)
+    candidate.data <- hip.hop.data %>% filter(candidate == "Hillary Clinton") 
+    ggplot(candidate.data, aes(x=album_release_date)) +
+      geom_histogram(aes(fill = sentiment), na.rm = TRUE) +
+      xlab("Year") +
+      xlim(adjustedRange) +
+      ylab("Count") +
+      ylim(0, 35) +
+      ggtitle("Hillary Clinton Lyrics Over Time") +
       theme(legend.position = "top", plot.title = element_text(hjust = 0.5))
   })
   
@@ -40,17 +54,26 @@ our.server <- function(input,output) {
   })
   
   output$scatterPlot <- renderPlot({
-    #proportion of sentiment ncols = 216
-    # need to group by year, then divide to find frequency
-    year_freq <- hip.hop.data %>% group_by(album_release_date) %>% 
-        summarize(num_per_year = n(), 
-                  num_unique = count(input$sentiment),
-                  proportion = (num_unique / num_per_year) * 100,
-                  year = album_release_date)
-    ggplot(year_freq, aes(x = year, y = proportion)) + geom_bar(color = "green") + xlab("year") + ylab(input$sentiment) +
-      ggtitle(paste0("Percent of ", input$sentiment, " Lyrics Over Time"))
+    #filters data to specified range, calculates proportion of sentiment by year, then filters by specified sentiment
+    final_table <- hip.hop.data %>% filter((album_release_date >= input$range[1]) &(album_release_date <= input$range[2])) %>% 
+                group_by(album_release_date) %>% 
+                mutate(n_x = n()) %>% 
+                group_by(album_release_date, sentiment) %>% 
+                summarize(percent = (n() / first(n_x))) %>% 
+                filter(sentiment == input$sentiment) 
+    
+    #plots table with line of fit
+    ggplot(final_table, aes(x = final_table$album_release_date, y = final_table$percent)) + geom_col(fill = "purple") + 
+      geom_smooth(method = 'lm', formula = y~x) +
+      xlab("Year") + 
+      ylab("Percent") + 
+      ggtitle(paste0("Proportion of ", toupper(substring(input$sentiment, 1,1)), substring(input$sentiment, 2), " Lyrics Over Time")) +
+      theme(axis.title = element_text(size = 18), plot.title = element_text(size = 22, face = "bold", hjust = .5))
   })
+  
+    #Sort candidate -working
+  output$rapTable <- renderTable({
+      hip.hop.data %>% filter(candidate == input$candidate) %>% filter(sentiment == input$sent)
+  })
+    #Sort sentiment almost working
 }
-
-
-#num_unique = count(vars = input$sentiment),
