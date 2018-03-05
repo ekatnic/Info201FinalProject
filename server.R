@@ -67,7 +67,7 @@ our.server <- function(input,output) {
     print(lyric.info, row.names = FALSE)
   })
   
-  output$scatterPlot <- renderPlot({
+  output$barPlot <- renderPlot({
     #filters data to specified range, calculates proportion of sentiment by year, then filters by specified sentiment
     final_table <- hip.hop.data %>% filter((album_release_date >= input$range[1]) &(album_release_date <= input$range[2])) %>% 
                 group_by(album_release_date) %>% 
@@ -76,8 +76,16 @@ our.server <- function(input,output) {
                 summarize(percent = (n() / first(n_x))) %>% 
                 filter(sentiment == input$sentiment) 
     
+    #sets color for bar-graph based on sentiment
+    set_color <- "red"
+    if (input$sentiment == "neutral") {
+      set_color <- "blue"
+    } else if (input$sentiment == "positive") {
+      set_color <- "green3"
+    }
+  
     #plots table with line of fit
-    ggplot(final_table, aes(x = final_table$album_release_date, y = final_table$percent)) + geom_col(fill = "purple") + 
+    ggplot(final_table, aes(x = final_table$album_release_date, y = final_table$percent)) + geom_col(fill = set_color) + 
       geom_smooth(method = 'lm', formula = y~x) +
       xlab("Year") + 
       ylab("Percent") + 

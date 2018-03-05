@@ -3,6 +3,11 @@ source("server.R")
 hip.hop.data <- read.csv("data/genius_hip_hop_lyrics.csv", stringsAsFactors = FALSE)
 
 my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
+                     tabPanel("Home Page",
+                     fluidPage(
+                        includeMarkdown("README.md")        
+                     )
+                     ),
                      tabPanel("Jarod",
                      #jarod's sidepannels/inputs here
                      fluidPage(
@@ -36,7 +41,7 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                                       max = 2016, value = c(1996, 2016), sep = "")
                         ),
                          mainPanel(
-                           plotOutput("scatterPlot")
+                           plotOutput("barPlot")
                          )
                        )
                      )
