@@ -41,7 +41,7 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                                   selectInput("candidate", label = h3("Choose a Candidate"),
                                               choices = list("Ben Carson","Bernie Sanders", "Chris Christie",
                                                              "Hillary Clinton", "Jeb Bush", "Mike Huckabee",
-                                                             "Ted Cruz"))
+                                                             "Ted Cruz", "Donald Trump"))
                                 ),
                                 mainPanel(
                                   plotOutput("politician.over.time")
