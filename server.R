@@ -50,8 +50,7 @@ our.server <- function(input,output) {
   })
   
   output$scatterPlot <- renderPlot({
-    #making final table to be plotted
-    #1989 - 2016
+    #filters data to specified range, calculates proportion of sentiment by year, then filters by specified sentiment
     final_table <- hip.hop.data %>% filter((album_release_date >= input$range[1]) &(album_release_date <= input$range[2])) %>% 
                 group_by(album_release_date) %>% 
                 mutate(n_x = n()) %>% 
@@ -59,9 +58,13 @@ our.server <- function(input,output) {
                 summarize(percent = (n() / first(n_x)) * 100) %>% 
                 filter(sentiment == input$sentiment) 
     
-    #plotting table
-    ggplot(final_table, aes(x = final_table$album_release_date, y = final_table$percent)) + geom_col(fill = "green") + xlab("year") + 
-      geom_smooth(method = 'lm', formula = y~x) + ylab(input$sentiment) + ggtitle(paste0("Percent of ", input$sentiment, " Lyrics Over Time"))
+    #plots table with line of fit
+    ggplot(final_table, aes(x = final_table$album_release_date, y = final_table$percent)) + geom_col(fill = "purple") + 
+      geom_smooth(method = 'lm', formula = y~x) +
+      xlab("Year") + 
+      ylab("Percent") + 
+      ggtitle(paste0("Percent of ", toupper(substring(input$sentiment, 1,1)), substring(input$sentiment, 2), " Lyrics Over Time")) +
+      theme(axis.title = element_text(size = 18), plot.title = element_text(size = 22, face = "bold"))
   })
   
     #Sort candidate -working
