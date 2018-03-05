@@ -9,11 +9,12 @@ our.server <- function(input,output) {
   hip.hop.data <- read.csv("data/genius_hip_hop_lyrics.csv", stringsAsFactors = FALSE)
   
   output$politician.over.time <- renderPlot({
+    adjustedRange <- c(input$yearRange[1]-1, input$yearRange[2]+1)
     candidate.data <- hip.hop.data %>% filter(candidate == input$candidate) 
     ggplot(candidate.data, aes(x=album_release_date)) +
-      geom_histogram(aes(fill = sentiment), bins = 30) +
+      geom_histogram(aes(fill = sentiment), na.rm = TRUE) +
       xlab("Year") +
-      xlim(input$yearRange) +
+      xlim(adjustedRange) +
       ylab("Count") +
       ylim(0, 35) +
       ggtitle("Lyrical Sentiment Over Time") +
