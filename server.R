@@ -42,7 +42,7 @@ our.server <- function(input,output) {
                 group_by(album_release_date) %>% 
                 mutate(n_x = n()) %>% 
                 group_by(album_release_date, sentiment) %>% 
-                summarize(percent = (n() / first(n_x)) * 100) %>% 
+                summarize(percent = (n() / first(n_x))) %>% 
                 filter(sentiment == input$sentiment) 
     
     #plots table with line of fit
@@ -50,8 +50,8 @@ our.server <- function(input,output) {
       geom_smooth(method = 'lm', formula = y~x) +
       xlab("Year") + 
       ylab("Percent") + 
-      ggtitle(paste0("Percent of ", toupper(substring(input$sentiment, 1,1)), substring(input$sentiment, 2), " Lyrics Over Time")) +
-      theme(axis.title = element_text(size = 18), plot.title = element_text(size = 22, face = "bold"))
+      ggtitle(paste0("Proportion of ", toupper(substring(input$sentiment, 1,1)), substring(input$sentiment, 2), " Lyrics Over Time")) +
+      theme(axis.title = element_text(size = 18), plot.title = element_text(size = 22, face = "bold", hjust = .5))
   })
   
     #Sort candidate -working
@@ -60,6 +60,3 @@ our.server <- function(input,output) {
   })
     #Sort sentiment almost working
 }
-
-
-#num_unique = count(vars = input$sentiment),

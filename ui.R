@@ -33,7 +33,7 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                            selectInput("sentiment", "Choose a sentiment:",
                                        choices = c("negative", "positive", "neutral")),
                           sliderInput("range", "Pick Time Range:", min = 1989,
-                                      max = 2016, value = c(2012, 2016), sep = "")
+                                      max = 2016, value = c(1996, 2016), sep = "")
                         ),
                          mainPanel(
                            plotOutput("scatterPlot")
