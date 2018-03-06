@@ -101,7 +101,7 @@ our.server <- function(input,output) {
     }
   
     #plots table with line of fit
-    ggplot(final_table, aes(x = final_table$album_release_date, y = final_table$percent)) + geom_col(fill = set_color) + 
+    ggplot(final_table, aes(x = final_table$album_release_date, y = final_table$percent)) + geom_point(color = set_color, size = 3) + 
       geom_smooth(method = 'lm', formula = y~x) +
       xlab("Year") + 
       ylab("Percent") + 
