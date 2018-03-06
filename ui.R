@@ -3,6 +3,11 @@ source("server.R")
 hip.hop.data <- read.csv("data/genius_hip_hop_lyrics.csv", stringsAsFactors = FALSE)
 
 my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
+                     tabPanel("Home Page",
+                     fluidPage(
+                        includeMarkdown("README.md")        
+                     )
+                     ),
                      tabPanel("Jarod",
                      #jarod's sidepannels/inputs here
                      fluidPage(
@@ -36,7 +41,7 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                                       max = 2016, value = c(1996, 2016), sep = "")
                         ),
                          mainPanel(
-                           plotOutput("scatterPlot")
+                           plotOutput("barPlot")
                          )
                        )
                      )
@@ -56,10 +61,10 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                               ),
    
                      #ethan's sidepannel/inputs here
-                     tabPanel("Ethan",
+                     tabPanel("EthanSentiment",
                               sidebarLayout(
                                 sidebarPanel(
-                                  sliderInput("year.range", label = h3("Choose Time Frame"), 
+                                  sliderInput("year.range", h3("Choose Time Frame"), 
                                               min = 1989, max=2016, value= c(1989, 2016) , sep="")
                                 ),
                                 mainPanel(
@@ -69,7 +74,21 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                               
                               )
                      
-                     ) 
+                     ),
+                     tabPanel("EthanSubject",
+                              sidebarLayout(
+                                sidebarPanel(
+                                  selectInput("candidate", "Choose Candidate",
+                                              choices = list("Donald Trump", "Hillary Clinton", "Jeb Bush",
+                                                             "Bernie Sanders", "Ben Carson", "Ted Cruz",
+                                                             "Mike Huckuckabee", "Chris Christie"))
+                                    
+                                  ),
+                                mainPanel(
+                                  plotOutput("subject.matter")
+                                )
+                              )
+                     )
             )
         )
 
