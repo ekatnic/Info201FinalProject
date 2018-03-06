@@ -51,10 +51,10 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                               fluidPage(
                                 titlePanel("Mentions of 2016 Primary Candidates"),
                                 sidebarPanel(
-                                  verbatimTextOutput("lyric")
+                                  verbatimTextOutput("info")
                                 ),
                                 mainPanel(
-                                  plotOutput("mentions")
+                                  plotOutput("mentions", click = "plot.click")
                                 )
                                )
                       ),

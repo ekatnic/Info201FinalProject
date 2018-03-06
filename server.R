@@ -2,6 +2,8 @@ library(shiny)
 library(dplyr)
 library(ggplot2)
 #install.packages("ggthemes")
+#install.packages("plotly")
+library(plotly)
 library(ggthemes)
 
 our.server <- function(input,output) {
@@ -53,7 +55,7 @@ our.server <- function(input,output) {
   })
   
   output$mentions <- renderPlot({
-    ggplot(hip.hop.data, aes(album_release_date)) + 
+    ggplot(hip.hop.data, aes(album_release_date)) +
       geom_dotplot(aes(fill = candidate)) +
       labs(title = "Rappers Mentioning Candidates Over Time") +
       ylim(0, 50) +
@@ -74,10 +76,10 @@ our.server <- function(input,output) {
       scale_fill_brewer(palette = "Set3")
   })
   
-  output$lyric <- renderPrint({
-    # lyric.info <- nearPoints(hip.hop.data, input$plot.hover, yvar = NULL) 
-    # req(nrow(lyric.info) != 0)
-    # print(lyric.info, row.names = FALSE)
+  output$info <- renderText({
+    lyric.info <- nearPoints(hip.hop.data, input$plot.hover, yvar = NULL)
+    req(nrow(lyric.info) != 0)
+    print(lyric.info, row.names = FALSE)
   })
   
   output$barPlot <- renderPlot({
