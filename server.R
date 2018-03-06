@@ -1,8 +1,6 @@
 library(shiny)
 library(dplyr)
 library(ggplot2)
-#install.packages("ggthemes")
-library(ggthemes)
 library(plotly)
 
 our.server <- function(input,output) {
