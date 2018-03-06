@@ -56,11 +56,11 @@ our.server <- function(input,output) {
   
   output$mentions <- renderPlot({
     ggplot(hip.hop.data, aes(album_release_date)) +
-      geom_dotplot(aes(fill = candidate)) +
-      labs(title = "Rappers Mentioning Candidates Over Time") +
+      geom_dotplot(aes(fill = candidate), binwidth = 1) +
+      labs(title = "Rappers Mentioning Candidates Over Time", x = "Year", y = "Count") +
       ylim(0, 50) +
-      theme_fivethirtyeight() +
-      scale_fill_brewer(palette = "Set3")
+      theme(axis.title = element_text(size = 18), plot.title = element_text(size = 22, face = "bold", hjust = .5)) +
+      scale_fill_brewer(palette = "Paired")
   })
   
   output$rappers <- renderPlot({
@@ -71,9 +71,10 @@ our.server <- function(input,output) {
       head(10)
     ggplot(rapper.data, aes(artist, rapper_count)) +
       geom_bar(aes(fill = artist), stat = "identity") +
-      labs(title = "Rappers Mentioning Politicians") +
-      theme_fivethirtyeight()+
-      scale_fill_brewer(palette = "Set3")
+      labs(title = "Top 10 Rappers Mentioning Politicians", x = "Artist", y = "Count") +
+      theme(axis.title = element_text(size = 18), plot.title = element_text(size = 22, face = "bold", hjust = .5), 
+            axis.text.x = element_blank(), axis.ticks.x = element_blank()) +
+      scale_fill_brewer(palette = "Paired")
   })
   
   output$info <- renderText({

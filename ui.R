@@ -47,16 +47,14 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                      tabPanel("Rasik Candidate",
                               fluidPage(
                                 titlePanel("Mentions of 2016 Primary Candidates"),
-                                sidebarPanel(
-                                  verbatimTextOutput("info")
-                                ),
                                 mainPanel(
-                                  plotOutput("mentions", click = "plot.click")
+                                  plotOutput("mentions")
                                 )
                                )
                       ),
                      tabPanel("Rasik Rapper",
                               fluidPage(
+                                titlePanel("Rappers Most Frequently Mentioning Politicians"),
                                 mainPanel(
                                   plotOutput("rappers")
                                 )
