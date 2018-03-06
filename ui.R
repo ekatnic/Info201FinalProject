@@ -47,18 +47,24 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                      )
                      ),
 
-                     tabPanel("Rasik",
+                     tabPanel("Rasik Candidate",
                               fluidPage(
                                 titlePanel("Mentions of 2016 Primary Candidates"),
                                 sidebarPanel(
                                   verbatimTextOutput("lyric")
                                 ),
                                 mainPanel(
-                                  plotOutput("rappers", hover = "plot.hover"),
                                   plotOutput("mentions")
                                 )
                                )
-                              ),
+                      ),
+                     tabPanel("Rasik Rapper",
+                              fluidPage(
+                                mainPanel(
+                                  plotOutput("rappers")
+                                )
+                              )
+                      ),
    
                      #ethan's sidepannel/inputs here
                      tabPanel("EthanSentiment",
