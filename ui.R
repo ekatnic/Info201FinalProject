@@ -48,10 +48,10 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                      tabPanel("Rasik Candidate",
                               fluidPage(
                                 titlePanel("Mentions of 2016 Primary Candidates"),
-                                mainPanel(
-                                  plotOutput("mentions")
-                                )
-                               )
+                                  mainPanel(
+                                    plotlyOutput("mentions")
+                                  )
+                              )
                       ),
                      tabPanel("Rasik Rapper",
                               fluidPage(

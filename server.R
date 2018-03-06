@@ -3,6 +3,7 @@ library(dplyr)
 library(ggplot2)
 #install.packages("ggthemes")
 library(ggthemes)
+library(plotly)
 
 our.server <- function(input,output) {
   
@@ -52,18 +53,22 @@ our.server <- function(input,output) {
     
   })
   
-   # shows summary dotplot of candidate mentions
-   output$mentions <- renderPlot({
-    ggplot(hip.hop.data, aes(album_release_date)) +
-      geom_dotplot(aes(fill = candidate), binwidth = 1) +
+   #creates summary dotplot of candidate mentions
+   output$mentions <- renderPlotly({
+     summary.dotplot <- ggplot(hip.hop.data, aes(album_release_date)) +
+      geom_dotplot(aes(fill = candidate), binwidth = 2) +
+      ylim(0, 25) +
       labs(title = "Candidate Mentions Over Time", x = "Year", y = "Count") +
-      ylim(0, 50) +
       theme(axis.title = element_text(size = 18), plot.title = element_text(size = 22, face = "bold", hjust = .5)) +
       scale_fill_brewer(palette = "Paired")
+     ggplotly(summary.dotplot)
+     plotly_build(summary.dotplot)
+     text.to.show <- paste("Artist:", hip.hop.data$artist, sep = " ")
+     style(summary.dotplot, text = text.to.show, hoverinfo = "text")
   })
   
   output$rappers <- renderPlot({
-    # filters for each checkbox option on entire dataset 
+    #filters for each artist checkbox option 
     rapper.data <- hip.hop.data %>%
       filter(candidate %in% input$politician) %>% 
       group_by(artist) %>%
@@ -71,20 +76,13 @@ our.server <- function(input,output) {
       arrange(desc(rapper_count)) %>%
       head(10)
     
-    # barplot of which artists mention selected politicians the most
+    #creates barplot of which artists mention selected politicians the most
     ggplot(rapper.data, aes(artist, rapper_count)) +
       geom_bar(aes(fill = artist), stat = "identity") +
       labs(title = "Artist Mentions of Politicians", x = "Artist", y = "Count") +
       theme(axis.title = element_text(size = 18), plot.title = element_text(size = 22, face = "bold", hjust = .5),
             axis.text.x = element_blank(), axis.ticks.x = element_blank()) +
       scale_fill_brewer(palette = "Paired")
-  })
-  
-  # supposed to be hover info of summary dotplot but can't get it to work 
-  output$info <- renderText({
-    lyric.info <- nearPoints(hip.hop.data, input$plot.hover, yvar = NULL)
-    req(nrow(lyric.info) != 0)
-    print(lyric.info, row.names = FALSE)
   })
   
   output$barPlot <- renderPlot({
