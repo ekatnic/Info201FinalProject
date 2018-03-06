@@ -43,7 +43,8 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                        )
                      )
                      ),
-
+                     
+                     #rasik's sidepanels/inputs here
                      tabPanel("Rasik Candidate",
                               fluidPage(
                                 titlePanel("Mentions of 2016 Primary Candidates"),
@@ -55,9 +56,17 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                      tabPanel("Rasik Rapper",
                               fluidPage(
                                 titlePanel("Rappers Most Frequently Mentioning Politicians"),
+                                sidebarLayout(
+                                  sidebarPanel(
+                                    checkboxGroupInput("politician", "Choose a Candidate:",
+                                                choices = c("Donald Trump", "Hillary Clinton", "Jeb Bush",
+                                                            "Bernie Sanders", "Ben Carson", "Ted Cruz", 
+                                                            "Mike Huckabee", "Chris Christie"))
+                                  ),
                                 mainPanel(
                                   plotOutput("rappers")
                                 )
+                              )
                               )
                       ),
    

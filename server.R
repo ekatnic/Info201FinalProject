@@ -2,8 +2,6 @@ library(shiny)
 library(dplyr)
 library(ggplot2)
 #install.packages("ggthemes")
-#install.packages("plotly")
-library(plotly)
 library(ggthemes)
 
 our.server <- function(input,output) {
@@ -54,29 +52,35 @@ our.server <- function(input,output) {
     
   })
   
-  output$mentions <- renderPlot({
+   # shows summary dotplot of candidate mentions
+   output$mentions <- renderPlot({
     ggplot(hip.hop.data, aes(album_release_date)) +
       geom_dotplot(aes(fill = candidate), binwidth = 1) +
-      labs(title = "Rappers Mentioning Candidates Over Time", x = "Year", y = "Count") +
+      labs(title = "Candidate Mentions Over Time", x = "Year", y = "Count") +
       ylim(0, 50) +
       theme(axis.title = element_text(size = 18), plot.title = element_text(size = 22, face = "bold", hjust = .5)) +
       scale_fill_brewer(palette = "Paired")
   })
   
   output$rappers <- renderPlot({
+    # filters for each checkbox option on entire dataset 
     rapper.data <- hip.hop.data %>%
+      filter(candidate %in% input$politician) %>% 
       group_by(artist) %>%
-      summarise(rapper_count = n()) %>% 
-      arrange(desc(rapper_count)) %>% 
+      summarise(rapper_count = n()) %>%
+      arrange(desc(rapper_count)) %>%
       head(10)
+    
+    # barplot of which artists mention selected politicians the most
     ggplot(rapper.data, aes(artist, rapper_count)) +
       geom_bar(aes(fill = artist), stat = "identity") +
-      labs(title = "Top 10 Rappers Mentioning Politicians", x = "Artist", y = "Count") +
-      theme(axis.title = element_text(size = 18), plot.title = element_text(size = 22, face = "bold", hjust = .5), 
+      labs(title = "Artist Mentions of Politicians", x = "Artist", y = "Count") +
+      theme(axis.title = element_text(size = 18), plot.title = element_text(size = 22, face = "bold", hjust = .5),
             axis.text.x = element_blank(), axis.ticks.x = element_blank()) +
       scale_fill_brewer(palette = "Paired")
   })
   
+  # supposed to be hover info of summary dotplot but can't get it to work 
   output$info <- renderText({
     lyric.info <- nearPoints(hip.hop.data, input$plot.hover, yvar = NULL)
     req(nrow(lyric.info) != 0)
