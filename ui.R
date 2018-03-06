@@ -17,12 +17,9 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                                      label = strong("Table by candidate"),
                                      choices = c("Donald Trump", "Hillary Clinton", "Ted Cruz", "Chris Christie", "Ben Carson", "Jeb Bush", "Mike Huckabee"),
                                      selected = "Donald Trump"),
-                         checkboxGroupInput(inputId = "sent",
-                                            label = "Sentiments to show:",
-                                            choices = c("Negative Sentiments" = "negative",
-                                                        "Neutral Sentiments" = "neutral",
-                                                        "Positive Sentiments" = "positive"),
-                                            selected = list("negative", "neutral", "positive")),
+                         checkboxInput("neg", "negative", TRUE),
+                         checkboxInput("neu", "neutral", TRUE),
+                         checkboxInput("pos", "positive", TRUE),
                          mainPanel(tableOutput("rapTable")
                          )
                        )

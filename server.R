@@ -110,9 +110,22 @@ our.server <- function(input,output) {
   
     #Sort candidate -working
   output$rapTable <- renderTable({
-      hip.hop.data %>% filter(candidate == input$candidate2) %>% filter(sentiment == input$sent)
-  })
+      candidate.table <- hip.hop.data %>% filter(candidate == input$candidate2) 
+      neg.table <- if (input$neg == TRUE) {
+      candidate.table %>% filter(sentiment == "negative")
+      }
+      neu.table <- if (input$neu == TRUE) {
+      candidate.table %>% filter(sentiment == "neutral")
+      }
+      pos.table <- if (input$pos == TRUE) {
+      candidate.table %>% filter(sentiment == "positive")
+      }
+      AlmostTable <- rbind(neg.table, neu.table)
+      FinalTable <- rbind(AlmostTable, pos.table)
+      FinalTable <- FinalTable[order(FinalTable$id),]
+      FinalTable <- FinalTable[,-1]
     #Sort sentiment almost working
 }
-
+)
+}
 
