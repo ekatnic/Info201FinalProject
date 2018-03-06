@@ -34,23 +34,32 @@ our.server <- function(input,output) {
       theme(legend.position = "top", plot.title = element_text(hjust = 0.5))
   })
   
-  output$primaries <- renderPlot({
-    ggplot(hip.hop.data, aes(x = album_release_date)) +
-      geom_dotplot(aes(fill = candidate), binwidth = 1, method = "histodot") +
+  output$mentions <- renderPlot({
+    ggplot(hip.hop.data, aes(album_release_date)) + 
+      geom_dotplot(aes(fill = candidate)) +
+      labs(title = "Rappers Mentioning Candidates Over Time") +
       ylim(0, 50) +
-      labs(title = "Candidates Mentioned Per Year") +
+      theme_fivethirtyeight() +
+      scale_fill_brewer(palette = "Set3")
+  })
+  
+  output$rappers <- renderPlot({
+    rapper.data <- hip.hop.data %>%
+      group_by(artist) %>%
+      summarise(rapper_count = n()) %>% 
+      arrange(desc(rapper_count)) %>% 
+      head(10)
+    ggplot(rapper.data, aes(artist, rapper_count)) +
+      geom_bar(aes(fill = artist), stat = "identity") +
+      labs(title = "Rappers Mentioning Politicians") +
       theme_fivethirtyeight()+
       scale_fill_brewer(palette = "Set3")
-    # x axis: artist
-    # y axis: count
-    # color: candidate
-    #
   })
   
   output$lyric <- renderPrint({
-    lyric.info <- nearPoints(hip.hop.data, input$plot.hover, yvar = NULL) 
-    req(nrow(lyric.info) != 0)
-    print(lyric.info, row.names = FALSE)
+    # lyric.info <- nearPoints(hip.hop.data, input$plot.hover, yvar = NULL) 
+    # req(nrow(lyric.info) != 0)
+    # print(lyric.info, row.names = FALSE)
   })
   
   output$scatterPlot <- renderPlot({
@@ -77,3 +86,5 @@ our.server <- function(input,output) {
   })
     #Sort sentiment almost working
 }
+
+
