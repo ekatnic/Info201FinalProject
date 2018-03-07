@@ -6,7 +6,7 @@
 #### Group BF 3
 #### Jarod Martin, Ethan Katnic, Abbey Moore, Rasik Parikh
 
-![picture](~/Desktop/INFO_201/Info201FinalProject/maxresdefault.jpg)
+![picture](https://i.imgur.com/diy88vX.jpg)
 </center>
 
   This app works with [this](https://github.com/fivethirtyeight/data/tree/master/hip-hop-candidate-lyrics) data from [fivethirtyeight.com]("http://fivethirtyeight.com/"), which is a record of hip-hop lyrical references to 2016 political candidates over the past 25 years.
