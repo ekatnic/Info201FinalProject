@@ -136,3 +136,4 @@ our.server <- function(input,output) {
   })
 }
 
+shinyServer(our.server)

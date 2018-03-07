@@ -114,4 +114,4 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                      )
             )
         )
-
+shinyUI(my.ui)
