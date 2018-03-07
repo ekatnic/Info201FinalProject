@@ -27,13 +27,15 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                      ),
                      
                      tabPanel("Abbey",
-                     #abbey's sidepannels/inputs here
                      fluidPage(
                        titlePanel("Sentiment Over Time"),
                        sidebarLayout(
                          sidebarPanel(
+                           # creates a select box widget that allows the user to select a sentiment
                            selectInput("sentiment", "Choose a sentiment:",
                                        choices = c("negative", "positive", "neutral")),
+                           # creates a slider widget that allows the user to select a time frame of their choice
+                           # the slider is set between 1996 and 2016
                           sliderInput("range", "Pick Time Range:", min = 1989,
                                       max = 2016, value = c(1996, 2016), sep = "")
                         ),
