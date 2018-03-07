@@ -11,18 +11,18 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                      # lyric data table
                      tabPanel("Lyric Data Table",
                      fluidPage(
-                       headerPanel('Political Rap Data: Sort Candidates and Rap Sentiment'),
-                       sidebarPanel(
+                       titlePanel("What Rappers are Saying About Politicians"),
+                       fluidRow(
                          # creates widget that chooses candidate
                          selectInput(inputId  = "candidate2",
-                                     label = strong("Table by candidate"),
+                                     label = strong("Pick a candidate:"),
                                      choices = c("Donald Trump", "Hillary Clinton", "Ted Cruz", "Chris Christie", "Ben Carson", "Jeb Bush", "Mike Huckabee"),
                                      selected = "Donald Trump"),
                          # creates widget that chooses sentiment
                          checkboxInput("neg", "Negative Sentiments", TRUE),
-                         checkboxInput("neu", "Neutral Sentiments", TRUE),
-                         checkboxInput("pos", "Positive Sentiments", TRUE),
-                         mainPanel(tableOutput("rapTable")
+                         checkboxInput("neu", "Neutral Sentiments", FALSE),
+                         checkboxInput("pos", "Positive Sentiments", FALSE),
+                         mainPanel(tableOutput("rapTable"), width = 12
                          )
                        )
                      )
