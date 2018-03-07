@@ -47,7 +47,8 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                                     checkboxGroupInput("politician", "Choose a Candidate:",
                                                        choices = c("Donald Trump", "Hillary Clinton", "Jeb Bush",
                                                                    "Bernie Sanders", "Ben Carson", "Ted Cruz", 
-                                                                   "Mike Huckabee", "Chris Christie"))
+                                                                   "Mike Huckabee", "Chris Christie"), 
+                                                       selected = hip.hop.data$candidate)
                                   ),
                                   mainPanel(
                                     plotOutput("rappers")
