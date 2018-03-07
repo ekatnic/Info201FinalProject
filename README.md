@@ -12,6 +12,6 @@
   This app works with [this](https://github.com/fivethirtyeight/data/tree/master/hip-hop-candidate-lyrics) data from [fivethirtyeight.com]("http://fivethirtyeight.com/"), which is a record of hip-hop lyrical references to 2016 political candidates over the past 25 years.
   
   Interesting Trends: 
-    - Sentiment has generally become *more* negative, and *less* positive over time
-    - The subject of _Hillary Clinton's_ lyric references tend to be *more* personal than other candidate's
-    - Trump's references were very _positive_, up until the 2016 election, when they became much more _political_
+    * Sentiment has generally become _more_ negative, and _less_ positive over time
+    * The subject of _Hillary Clinton's_ lyric references tend to be _more_ personal than other candidate's
+    * Trump's references were very _positive_, up until the 2016 election, when they became much more _political_
