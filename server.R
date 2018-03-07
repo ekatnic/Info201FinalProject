@@ -54,8 +54,11 @@ our.server <- function(input,output) {
    #creates summary dotplot of candidate mentions
    output$mentions <- renderPlotly({
      summary.dotplot <- ggplot(hip.hop.data, aes(album_release_date)) +
-      geom_dotplot(aes(fill = candidate), binwidth = 2) +
-      ylim(0, 25) +
+      geom_dotplot(aes(fill = candidate), method = "dotdensity", binwidth = 1.5) +
+      scale_x_continuous(breaks = seq(min(hip.hop.data$album_release_date), max(hip.hop.data$album_release_date), by = 1)) +
+      theme(axis.text.x = element_text(angle = 65)) +
+      ylim(0, 17) +
+      theme(axis.text.y = element_blank(), axis.ticks.y = element_blank()) +
       labs(title = "Candidate Mentions Over Time", x = "Year", y = "Count") +
       theme(axis.title = element_text(size = 18), plot.title = element_text(size = 22, face = "bold", hjust = .5)) +
       scale_fill_brewer(palette = "Paired")
