@@ -6,7 +6,7 @@
 #### Group BF 3
 #### Jarod Martin, Ethan Katnic, Abbey Moore, Rasik Parikh
 
-![picture](~/Desktop/INFO_201/Info201FinalProject/maxresdefault.jpg)
+![picture](https://i.imgur.com/diy88vX.jpg)
 </center>
 
 Our group has created a shiny application for our final project which analyzes a data set allowing users to easily sift through it noticing outliers, understanding trends, and drawing their own conclusions. We worked with fivethirtyeight [data](https://github.com/fivethirtyeight/data/tree/master/hip-hop-candidate-lyrics) that is a record of hip-hop lyrical references to 2016 political candidates over the past 25 years, noting the artist, sentiment and subject matter of each line. The purpose of our project was to shed light on how the public opinions of the 2016 candidates have shifted over the years. Some visuals of our app include when candidates were relevant in culture, whether they were criticized or approved of, and what types of topics revolve around specific candidates (such as Donald Trump and money).  

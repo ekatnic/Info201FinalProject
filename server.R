@@ -7,51 +7,23 @@ our.server <- function(input,output) {
   
   hip.hop.data <- read.csv("data/genius_hip_hop_lyrics.csv", stringsAsFactors = FALSE)
   
-  #Helper function for sentiment graphs to plot sentiment based on candidate name
-  sentiment.print <- function(candidate.name){
-    #Filter by candidate name and make range inclusive
-    adjustedRange <- c(input$year.range[1]-1, input$year.range[2]+1)
-    candidate.data <- hip.hop.data %>% filter(candidate == candidate.name) 
-    #Plot graph
-    ggplot(candidate.data, aes(x=album_release_date)) +
-      geom_histogram(aes(fill = sentiment), na.rm = TRUE) +
-      scale_fill_manual(values=c("red", "blue", "green3")) +
-      xlab("Year") +
-      xlim(adjustedRange) +
-      ylab("Count") +
-      ylim(0, 35) +
-      ggtitle(paste(candidate.name, "Mentions Over Time")) +
-      theme(axis.title = element_text(size = 18), plot.title = element_text(size = 22, face = "bold", hjust = .5),
-            legend.position = "top")
-  }
-  
-  #Trump sentiment over time graph
-  output$trump.over.time <- renderPlot({
-      trump.graph <- sentiment.print("Donald Trump")
-      print(trump.graph)
-  })
-  
-  #Clinton sentiment over time graph
-  output$clinton.over.time <- renderPlot({
-      clinton.graph <- sentiment.print("Hillary Clinton")
-      print(clinton.graph)
-  })
-  
-  #Subject matter over time graph
-  output$subject.matter <- renderPlot({
-    #filter by candidate and remove N/A themes
-    candidate.data <- hip.hop.data %>% filter(candidate == input$candidate, theme != "N/A")
-    #plot histogram
-    ggplot(candidate.data, aes(x=album_release_date)) +
-      geom_histogram(aes(fill = theme), na.rm=TRUE) +
-      scale_fill_manual(values=c("hotel" = "orange", "money" = "green3", "personal" = "blue",
-                                 "political" = "red", "power" =" purple", "sexual" = "yellow",
-                                 "The Apprentice" = "black", "orange")) +
-      ggtitle("Subject Matter Over Time") +
-      xlab("Year") +
-      ylab("Count") +
-      theme(axis.title = element_text(size = 18), plot.title = element_text(size = 22, face = "bold", hjust = .5))
-  })
+  #creates lyrical data table
+  output$rapTable <- renderTable({
+    #filters candidate table according to selected candidate
+    candidate.table <- hip.hop.data %>% filter(candidate == input$candidate2)
+    neg.table <- if (input$neg == TRUE) {
+      candidate.table %>% filter(sentiment == "negative")
+    }
+    neu.table <- if (input$neu == TRUE) {
+      candidate.table %>% filter(sentiment == "neutral")
+    }
+    pos.table <- if (input$pos == TRUE) {
+      candidate.table %>% filter(sentiment == "positive")
+    }
+    #combines smaller tables to a final table with all selected sentiments
+    FinalTable <- rbind(neg.table, neu.table, pos.table)
+    FinalTable <- select(FinalTable, candidate, song, artist, sentiment, theme, line)
+  }, striped = TRUE, bordered = TRUE, spacing = 'm', width = '90%')
   
    #creates summary dotplot of candidate mentions
    output$mentions <- renderPlotly({
@@ -71,6 +43,7 @@ our.server <- function(input,output) {
      style(summary.dotplot, text = text.to.show, hoverinfo = "text")
   })
   
+   #creates rapper bar plot
   output$rappers <- renderPlot({
     #filters for each artist checkbox option 
     rapper.data <- hip.hop.data %>%
@@ -89,6 +62,7 @@ our.server <- function(input,output) {
       scale_fill_brewer(palette = "Paired")
   })
   
+  #creates sentiment trend scatterplot
   output$barPlot <- renderPlot({
     #filters data to specified range, calculates proportion of sentiment by year, then filters by specified sentiment
     final_table <- hip.hop.data %>% filter((album_release_date >= input$range[1]) &(album_release_date <= input$range[2])) %>% 
@@ -115,22 +89,50 @@ our.server <- function(input,output) {
       theme(axis.title = element_text(size = 18), plot.title = element_text(size = 22, face = "bold", hjust = .5))
   })
   
-
-  output$rapTable <- renderTable({
-    #filters candidate table according to selected candidate
-    candidate.table <- hip.hop.data %>% filter(candidate == input$candidate2)
-    neg.table <- if (input$neg == TRUE) {
-      candidate.table %>% filter(sentiment == "negative")
-    }
-    neu.table <- if (input$neu == TRUE) {
-      candidate.table %>% filter(sentiment == "neutral")
-    }
-    pos.table <- if (input$pos == TRUE) {
-      candidate.table %>% filter(sentiment == "positive")
-    }
-    #combines smaller tables to a final table with all selected sentiments
-    FinalTable <- rbind(neg.table, neu.table, pos.table)
-    FinalTable <- select(FinalTable, candidate, song, artist, sentiment, theme, line)
-  }, striped = TRUE, bordered = TRUE, spacing = 'm', width = '90%')
+  #Helper function for sentiment graphs to plot sentiment based on candidate name
+  sentiment.print <- function(candidate.name){
+    #Filter by candidate name and make range inclusive
+    adjustedRange <- c(input$year.range[1]-1, input$year.range[2]+1)
+    candidate.data <- hip.hop.data %>% filter(candidate == candidate.name) 
+    #Plot graph
+    ggplot(candidate.data, aes(x=album_release_date)) +
+      geom_histogram(aes(fill = sentiment), na.rm = TRUE) +
+      scale_fill_manual(values=c("red", "blue", "green3")) +
+      xlab("Year") +
+      xlim(adjustedRange) +
+      ylab("Count") +
+      ylim(0, 35) +
+      ggtitle(paste(candidate.name, "Mentions Over Time")) +
+      theme(axis.title = element_text(size = 18), plot.title = element_text(size = 22, face = "bold", hjust = .5),
+            legend.position = "top")
+  }
+  
+  #Trump sentiment over time graph
+  output$trump.over.time <- renderPlot({
+    trump.graph <- sentiment.print("Donald Trump")
+    print(trump.graph)
+  })
+  
+  #Clinton sentiment over time graph
+  output$clinton.over.time <- renderPlot({
+    clinton.graph <- sentiment.print("Hillary Clinton")
+    print(clinton.graph)
+  })
+  
+  #Subject matter over time graph
+  output$subject.matter <- renderPlot({
+    #filter by candidate and remove N/A themes
+    candidate.data <- hip.hop.data %>% filter(candidate == input$candidate, theme != "N/A")
+    #plot histogram
+    ggplot(candidate.data, aes(x=album_release_date)) +
+      geom_histogram(aes(fill = theme), na.rm=TRUE) +
+      scale_fill_manual(values=c("hotel" = "orange", "money" = "green3", "personal" = "blue",
+                                 "political" = "red", "power" =" purple", "sexual" = "yellow",
+                                 "The Apprentice" = "black", "orange")) +
+      ggtitle("Subject Matter Over Time") +
+      xlab("Year") +
+      ylab("Count") +
+      theme(axis.title = element_text(size = 18), plot.title = element_text(size = 22, face = "bold", hjust = .5))
+  })
 }
 
