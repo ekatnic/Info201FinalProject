@@ -112,24 +112,21 @@ our.server <- function(input,output) {
       theme(axis.title = element_text(size = 18), plot.title = element_text(size = 22, face = "bold", hjust = .5))
   })
   
-    #Sort candidate -working
-  output$rapTable <- renderTable({
-      candidate.table <- hip.hop.data %>% filter(candidate == input$candidate2) 
-      neg.table <- if (input$neg == TRUE) {
-      candidate.table %>% filter(sentiment == "negative")
-      }
-      neu.table <- if (input$neu == TRUE) {
-      candidate.table %>% filter(sentiment == "neutral")
-      }
-      pos.table <- if (input$pos == TRUE) {
-      candidate.table %>% filter(sentiment == "positive")
-      }
-      AlmostTable <- rbind(neg.table, neu.table)
-      FinalTable <- rbind(AlmostTable, pos.table)
-      FinalTable <- FinalTable[order(FinalTable$id),]
-      FinalTable <- FinalTable[,-1]
-    #Sort sentiment almost working
-}
-)
-}
 
+  output$rapTable <- renderTable({
+    candidate.table <- hip.hop.data %>% filter(candidate == input$candidate2)
+    neg.table <- if (input$neg == TRUE) {
+      candidate.table %>% filter(sentiment == "negative")
+    }
+    neu.table <- if (input$neu == TRUE) {
+      candidate.table %>% filter(sentiment == "neutral")
+    }
+    pos.table <- if (input$pos == TRUE) {
+      candidate.table %>% filter(sentiment == "positive")
+    }
+    FinalTable <- rbind(neg.table, neu.table, pos.table)
+    FinalTable <- select(FinalTable, candidate, song, artist, sentiment, theme, line)
+  }, striped = TRUE, bordered = TRUE, spacing = 'xs', width = '1440')
+}
+#FinalTable <- select(FinalTable, candidate, song, artist, sentiment, theme, album_release_date, line)
+# colnames(FinalTable) <- c("Candidate", "Song", "Artist", "Sentiment", "Theme", "Album Release Date", "Line")
