@@ -43,8 +43,8 @@ our.server <- function(input,output) {
     candidate.data <- hip.hop.data %>% filter(candidate == input$candidate, theme != "N/A")
     ggplot(candidate.data, aes(x=album_release_date)) +
       geom_histogram(aes(fill = theme), na.rm=TRUE) +
-      scale_fill_manual(values=c("hotel" = "yellow2", "money" = "green3", "personal" = "blue",
-                                 "political" = "red", "power" =" purple", "sexual" = "orange",
+      scale_fill_manual(values=c("hotel" = "orange", "money" = "green3", "personal" = "blue",
+                                 "political" = "red", "power" =" purple", "sexual" = "yellow",
                                  "The Apprentice" = "black", "orange")) +
       ggtitle("Subject Matter Over Time") +
       xlab("Year") +
