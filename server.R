@@ -7,6 +7,7 @@ our.server <- function(input,output) {
   
   hip.hop.data <- read.csv("data/genius_hip_hop_lyrics.csv", stringsAsFactors = FALSE)
   
+  #Trump sentiment over time graph
   output$trump.over.time <- renderPlot({
     adjustedRange <- c(input$year.range[1]-1, input$year.range[2]+1)
     candidate.data <- hip.hop.data %>% filter(candidate == "Donald Trump") 
@@ -22,6 +23,7 @@ our.server <- function(input,output) {
             legend.position = "top")
   })
   
+  #Clinton sentiment over time graph
   output$clinton.over.time <- renderPlot({
     adjustedRange <- c(input$year.range[1]-1, input$year.range[2]+1)
     candidate.data <- hip.hop.data %>% filter(candidate == "Hillary Clinton") 
@@ -37,6 +39,7 @@ our.server <- function(input,output) {
             legend.position = "top")
   })
   
+  #Subject matter over time graph
   output$subject.matter <- renderPlot({
     candidate.data <- hip.hop.data %>% filter(candidate == input$candidate, theme != "N/A")
     ggplot(candidate.data, aes(x=album_release_date)) +
@@ -63,7 +66,9 @@ our.server <- function(input,output) {
       scale_fill_brewer(palette = "Paired")
      ggplotly(summary.dotplot)
      plotly_build(summary.dotplot)
-     text.to.show <- paste("Artist:", hip.hop.data$artist, sep = " ")
+     text.to.show <- paste("Candidate: ", hip.hop.data$candidate, ",   ", 
+                           "Artist: ", hip.hop.data$artist,
+                           "\nLyric: '", hip.hop.data$line, "'", sep = "")
      style(summary.dotplot, text = text.to.show, hoverinfo = "text")
   })
   
