@@ -1,6 +1,5 @@
 library(shiny)
 source("server.R")
-hip.hop.data <- read.csv("data/genius_hip_hop_lyrics.csv", stringsAsFactors = FALSE)
 
 my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                      tabPanel("Home Page",

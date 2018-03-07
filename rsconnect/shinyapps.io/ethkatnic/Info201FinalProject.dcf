@@ -5,9 +5,9 @@ account: ethkatnic
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 295352
-bundleId: 1257884
+bundleId: 1257913
 url: https://ethkatnic.shinyapps.io/Info201FinalProject/
-when: 1520462353.33693
+when: 1520463274.79337
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: .RData|maxresdefault.jpg
+ignoredFiles: .RData|maxresdefault.jpg|README.html|README.md|data/.DS_Store|data/genius_hip_hop_lyrics.csv
