@@ -77,7 +77,7 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                       ),
    
                      # Sentiment of Trump and Clinton Over Time
-                     tabPanel("Towards Trump & Clinton",
+                     tabPanel("Feelings Toward Trump & Clinton",
                               sidebarLayout(
                                 sidebarPanel(
                                   # creates widget that chooses year
