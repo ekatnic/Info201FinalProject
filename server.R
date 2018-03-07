@@ -117,6 +117,7 @@ our.server <- function(input,output) {
   
 
   output$rapTable <- renderTable({
+    #filters candidate table according to selected candidate
     candidate.table <- hip.hop.data %>% filter(candidate == input$candidate2)
     neg.table <- if (input$neg == TRUE) {
       candidate.table %>% filter(sentiment == "negative")
@@ -127,9 +128,9 @@ our.server <- function(input,output) {
     pos.table <- if (input$pos == TRUE) {
       candidate.table %>% filter(sentiment == "positive")
     }
+    #combines smaller tables to a final table with all selected sentiments
     FinalTable <- rbind(neg.table, neu.table, pos.table)
     FinalTable <- select(FinalTable, candidate, song, artist, sentiment, theme, line)
-  }, striped = TRUE, bordered = TRUE, spacing = 'xs', width = '1440')
+  }, striped = TRUE, bordered = TRUE, spacing = 'm', width = '90%')
 }
-#FinalTable <- select(FinalTable, candidate, song, artist, sentiment, theme, album_release_date, line)
-# colnames(FinalTable) <- c("Candidate", "Song", "Artist", "Sentiment", "Theme", "Album Release Date", "Line")
+
