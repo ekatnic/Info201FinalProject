@@ -27,6 +27,34 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                        )
                      )
                      ),
+                     
+                     # Candidates mentioned over time tab
+                     tabPanel("Candidate Mentions",
+                              fluidPage(
+                                titlePanel("Mentions of 2016 Primary Candidates"),
+                                mainPanel(
+                                  plotlyOutput("mentions")
+                                )
+                              )
+                     ),
+                     # Rappers Commentating on politics
+                     tabPanel("Rappers Who Talk Politics",
+                              fluidPage(
+                                titlePanel("Rappers Most Frequently Mentioning Politicians"),
+                                sidebarLayout(
+                                  sidebarPanel(
+                                    # creates checkbox to choose politician referenced
+                                    checkboxGroupInput("politician", "Choose a Candidate:",
+                                                       choices = c("Donald Trump", "Hillary Clinton", "Jeb Bush",
+                                                                   "Bernie Sanders", "Ben Carson", "Ted Cruz", 
+                                                                   "Mike Huckabee", "Chris Christie"))
+                                  ),
+                                  mainPanel(
+                                    plotOutput("rappers")
+                                  )
+                                )
+                              )
+                     ),
                      # sentiment over time graph
                      tabPanel("Lyrical Sentiment Trend",
                      fluidPage(
@@ -47,34 +75,7 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                        )
                      )
                      ),
-                     
-                     # Candidates mentioned over time tab
-                     tabPanel("Candidate Mentions",
-                              fluidPage(
-                                titlePanel("Mentions of 2016 Primary Candidates"),
-                                  mainPanel(
-                                    plotlyOutput("mentions")
-                                  )
-                              )
-                      ),
-                     # Rappers Commentating on politics
-                     tabPanel("Rappers Who Talk Politics",
-                              fluidPage(
-                                titlePanel("Rappers Most Frequently Mentioning Politicians"),
-                                sidebarLayout(
-                                  sidebarPanel(
-                                    # creates checkbox to choose politician referenced
-                                    checkboxGroupInput("politician", "Choose a Candidate:",
-                                                choices = c("Donald Trump", "Hillary Clinton", "Jeb Bush",
-                                                            "Bernie Sanders", "Ben Carson", "Ted Cruz", 
-                                                            "Mike Huckabee", "Chris Christie"))
-                                  ),
-                                mainPanel(
-                                  plotOutput("rappers")
-                                )
-                              )
-                              )
-                      ),
+
    
                      # Sentiment of Trump and Clinton Over Time
                      tabPanel("Feelings Toward Trump & Clinton",
