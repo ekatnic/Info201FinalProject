@@ -11,7 +11,7 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                      # lyric data table
                      tabPanel("Lyric Data Table",
                      fluidPage(
-                       headerPanel('Political Rap Data: Sort candidates and Rap Sentiments'),
+                       headerPanel('Political Rap Data: Sort Candidates and Rap Sentiment'),
                        sidebarPanel(
                          # creates widget that chooses candidate
                          selectInput(inputId  = "candidate2",
@@ -79,7 +79,8 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
 
    
                      # Sentiment of Trump and Clinton Over Time
-                     tabPanel("Feelings Toward Trump & Clinton",
+                     tabPanel("Feelings Toward Trump & Clinton", 
+                              titlePanel("Sentiment Toward Trump & Clinton"),
                               sidebarLayout(
                                 sidebarPanel(
                                   # creates widget that chooses year
@@ -96,6 +97,7 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                      ),
                      # Subject Matter of Political References
                      tabPanel("Subject of Lyrics",
+                              titlePanel("Subject Matter of References"),
                               sidebarLayout(
                                 sidebarPanel(
                                   # Choose candidate to plot
