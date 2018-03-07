@@ -8,15 +8,17 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                         includeMarkdown("README.md")        
                      )
                      ),
-                     tabPanel("Jarod",
-                     #jarod's sidepannels/inputs here
+                     # lyric data table
+                     tabPanel("Lyric Data Table",
                      fluidPage(
                        headerPanel('Political Rap Data: Sort candidates and Rap Sentiments'),
                        sidebarPanel(
+                         # creates widget that chooses candidate
                          selectInput(inputId  = "candidate2",
                                      label = strong("Table by candidate"),
                                      choices = c("Donald Trump", "Hillary Clinton", "Ted Cruz", "Chris Christie", "Ben Carson", "Jeb Bush", "Mike Huckabee"),
                                      selected = "Donald Trump"),
+                         # creates widget that chooses sentiment
                          checkboxInput("neg", "Negative Sentiments", TRUE),
                          checkboxInput("neu", "Neutral Sentiments", TRUE),
                          checkboxInput("pos", "Positive Sentiments", TRUE),
@@ -25,8 +27,8 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                        )
                      )
                      ),
-                     
-                     tabPanel("Abbey",
+                     # sentiment over time graph
+                     tabPanel("Lyrical Sentiment Trend",
                      fluidPage(
                        titlePanel("Sentiment Over Time"),
                        sidebarLayout(
@@ -46,8 +48,8 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                      )
                      ),
                      
-                     #rasik's sidepanels/inputs here
-                     tabPanel("Rasik Candidate",
+                     # Candidates mentioned over time tab
+                     tabPanel("Candidate Mentions",
                               fluidPage(
                                 titlePanel("Mentions of 2016 Primary Candidates"),
                                   mainPanel(
@@ -55,11 +57,13 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                                   )
                               )
                       ),
-                     tabPanel("Rasik Rapper",
+                     # Rappers Commentating on politics
+                     tabPanel("Rappers Who Talk Politics",
                               fluidPage(
                                 titlePanel("Rappers Most Frequently Mentioning Politicians"),
                                 sidebarLayout(
                                   sidebarPanel(
+                                    # creates checkbox to choose politician referenced
                                     checkboxGroupInput("politician", "Choose a Candidate:",
                                                 choices = c("Donald Trump", "Hillary Clinton", "Jeb Bush",
                                                             "Bernie Sanders", "Ben Carson", "Ted Cruz", 
@@ -72,10 +76,11 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                               )
                       ),
    
-                     #ethan's sidepannel/inputs here
-                     tabPanel("EthanSentiment",
+                     # Sentiment of Trump and Clinton Over Time
+                     tabPanel("Towards Trump & Clinton",
                               sidebarLayout(
                                 sidebarPanel(
+                                  # creates widget that chooses year
                                   sliderInput("year.range", h3("Choose Time Frame"), 
                                               min = 1989, max=2016, value= c(1989, 2016) , sep="")
                                 ),
@@ -87,9 +92,11 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                               )
                      
                      ),
-                     tabPanel("EthanSubject",
+                     # Subject Matter of Political References
+                     tabPanel("Subject of Lyrics",
                               sidebarLayout(
                                 sidebarPanel(
+                                  # Choose candidate to plot
                                   selectInput("candidate", "Choose Candidate",
                                               choices = list("Donald Trump", "Hillary Clinton", "Jeb Bush",
                                                              "Bernie Sanders", "Ben Carson", "Ted Cruz",
