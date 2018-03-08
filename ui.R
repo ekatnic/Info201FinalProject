@@ -1,5 +1,6 @@
 library(shiny)
 source("server.R")
+library("markdown")
 
 my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                      tabPanel("Home Page",
