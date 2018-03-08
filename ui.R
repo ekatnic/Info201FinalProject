@@ -58,7 +58,7 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                                                                    "Mike Huckabee", "Chris Christie"), 
                                                        selected = hip.hop.data$candidate),
                                     p("This plot allows the user to choose politicians of interest and see which artists
-                                      are mentioning them most frequently. When considering all of the politicians Rick Ross and 
+                                      are mentioning them most frequently. When considering all of the politicians, Rick Ross and 
                                       Nas are top artists.")
                                   ),
                                   mainPanel(
@@ -81,7 +81,7 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                           sliderInput("range", "Pick Time Range:", min = 1989,
                                       max = 2016, value = c(1996, 2016), sep = ""),
                           p("This plot shows the proportion of sentiment in rap lyrics over time. Notice that over the past
-                            25 years negative sentiment has increased when mentioning politicians while positive sentiment has
+                            20 years, the proportion of negative lyrics has increased, while positive lyrics has
                             decreased.")
                         ),
                          mainPanel(
@@ -102,8 +102,8 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                                               min = 1989, max=2016, value= c(1989, 2016) , sep=""),
                                   p("These plots show how the sentiment of mentions involving Donald Trump and Hillary Clinton
                                     have shifted over the past 25 years. Trump's sentiment has become more negative following 
-                                    his entrance into politics. while Clinton's had a spike of negativity during her 2012 campaign
-                                    but largely has remained neutral. Scroll down to see Clinton's plot.")
+                                    his entrance into politics, while Clinton's had a spike of negativity during her 2008 campaign
+                                    but has largely has remained neutral. Scroll down to see Clinton's plot.")
                                 ),
                                 mainPanel(
                                   plotOutput("trump.over.time"),
@@ -125,7 +125,7 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                                                              "Mike Huckuckabee", "Chris Christie")),
                                   p("This plot shows the subject matter of rap lyrics involving politicians over the past
                                     25 years. For Donald Trump, rap lyrics involving his name were largely about money and
-                                    his hotel brand Trump Towers. But then abruptly shifted to politics following his 
+                                    his hotel brand, Trump Towers, but the subject abruptly shifted to politics following his 
                                     presidential run.")
                                     
                                   ),
