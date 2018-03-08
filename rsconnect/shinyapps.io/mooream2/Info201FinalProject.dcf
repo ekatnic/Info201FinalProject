@@ -1,0 +1,13 @@
+name: Info201FinalProject
+title: Info201FinalProject
+username:
+account: mooream2
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 295405
+bundleId: 1258093
+url: https://mooream2.shinyapps.io/Info201FinalProject/
+when: 1520470132.97956
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData|maxresdefault.jpg|README.html|data/.DS_Store
