@@ -9,7 +9,7 @@
 ![picture](https://i.imgur.com/diy88vX.jpg)
 </center>
 
-  Our app works with [this](https://github.com/fivethirtyeight/data/tree/master/hip-hop-candidate-lyrics) data from [fivethirtyeight.com]("http://fivethirtyeight.com/"), which is a record of hip-hop lyrical references to 2016 political candidates over the past 25 years.
+  Our app works with [this](https://github.com/fivethirtyeight/data/tree/master/hip-hop-candidate-lyrics) data from [fivethirtyeight.com]("http://fivethirtyeight.com/"), which is a record of hip-hop lyrical references to 2016 political candidates over the past 25 years. FiveThirtyEight generated this data by scraping rap-lyric database, _Genius_, for mentions of candidate names.
   
 **Interesting Trends:** 
 - Sentiment has generally become _more_ negative, and _less_ positive over time

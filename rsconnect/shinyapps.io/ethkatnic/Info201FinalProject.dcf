@@ -5,8 +5,8 @@ account: ethkatnic
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 295409
-bundleId: 1258179
+bundleId: 1258436
 url: https://ethkatnic.shinyapps.io/Info201FinalProject/
-when: 1520474986.01866
+when: 1520487450.41038
 asMultiple: FALSE
 asStatic: FALSE

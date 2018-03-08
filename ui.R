@@ -58,8 +58,8 @@ my.ui <- (navbarPage("Hip-Hop Lyrics and Politicians",
                                                                    "Mike Huckabee", "Chris Christie"), 
                                                        selected = hip.hop.data$candidate),
                                     p("This plot allows the user to choose politicians of interest and see which artists
-                                      are mentioning them most frequently. When considering all of the politicians, Rick Ross and 
-                                      Nas are top artists.")
+                                      are mentioning them most frequently. When considering all of the politicians, you'll see that
+                                      Rick Ross and Nas have made the most political references.")
                                   ),
                                   mainPanel(
                                     plotOutput("rappers")
